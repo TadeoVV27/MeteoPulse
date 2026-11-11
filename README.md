@@ -1,8 +1,6 @@
 # 🌤️ MeteoPulse - Aplicación Web del Clima Global (Open-Meteo REST API)
 
-> **Laboratorio de Programación Web**  
-> **Actividad 4: Miniaplicación Web consumiendo una API REST**  
-> *Correspondencia con el programa:* Moderniza la Unidad temática 4, sustituyendo prácticas centradas únicamente en XML por intercambio de datos y servicios web actuales (JSON, REST, Fetch API, Async/Await).
+
 
 ---
 
