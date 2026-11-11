@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeteoPulse - Consulta del Clima Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <main class="container">
+    <!-- Encabezado -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🌤️</span>
+        <h1>MeteoPulse</h1>
+      </div>
+      <p class="subtitle">Miniaplicación web que consume la API REST de Open-Meteo en tiempo real</p>
+    </header>
+
+    <!-- Barra de Búsqueda y Filtros Rápidos -->
+    <section class="search-section" aria-label="Buscador de ciudades">
+      <form id="search-form" class="search-form">
+        <div class="input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="city-input" 
+            placeholder="Escribe una ciudad (ej. Madrid, Bogotá, Tokio, CDMX)..." 
+            autocomplete="off" 
+            required
+          >
+          <button type="button" id="clear-btn" class="clear-btn" title="Limpiar búsqueda" aria-label="Limpiar campo">✕</button>
+        </div>
+        <button type="submit" id="search-btn" class="btn btn-primary">
+          Buscar Clima
+        </button>
+      </form>
+
+      <!-- Botones de ciudades sugeridas / populares -->
+      <div class="quick-cities" aria-label="Ciudades sugeridas">
+        <span class="quick-label">Sugerencias:</span>
+        <div class="chips-container" id="quick-chips">
+          <button type="button" class="chip" data-city="Ciudad de México">🇲🇽 CDMX</button>
+          <button type="button" class="chip" data-city="Buenos Aires">🇦🇷 Buenos Aires</button>
+          <button type="button" class="chip" data-city="Bogotá">🇨🇴 Bogotá</button>
+          <button type="button" class="chip" data-city="Madrid">🇪🇸 Madrid</button>
+          <button type="button" class="chip" data-city="Santiago">🇨🇱 Santiago</button>
+          <button type="button" class="chip" data-city="Tokio">🇯🇵 Tokio</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Área de Selección Múltiple (cuando hay varias ciudades con el mismo nombre) -->
+    <section id="city-selector-section" class="city-selector-section hidden" aria-live="polite">
+      <h3>Selecciona la ubicación exacta:</h3>
+      <div id="city-options-list" class="city-options-list"></div>
+    </section>
+
+    <!-- Panel de Estados de Interfaz -->
+    
+    <!-- 1. Estado de Carga (Spinner) -->
+    <div id="loading-state" class="state-card hidden" aria-live="polite">
+      <div class="spinner"></div>
+      <p>Consultando satélites y estaciones meteorológicas...</p>
+    </div>
+
+    <!-- 2. Estado de Error -->
+    <div id="error-state" class="state-card error hidden" role="alert">
+      <div class="state-icon">⚠️</div>
+      <h3 id="error-title">Ocurrió un error</h3>
+      <p id="error-message">No se pudo obtener la información meteorológica.</p>
+      <button type="button" id="retry-btn" class="btn btn-secondary">Reintentar</button>
+    </div>
+
+    <!-- 3. Estado Vacío / Inicial -->
+    <div id="empty-state" class="state-card empty">
+      <div class="state-icon">🌍</div>
+      <h3>Comienza tu búsqueda meteorológica</h3>
+      <p>Ingresa una ciudad o selecciona una de las sugerencias para ver el pronóstico detallado.</p>
+    </div>
+
+    <!-- Contenedor Principal de Resultados (generado dinámicamente) -->
+    <section id="weather-content" class="weather-content hidden" aria-live="polite">
+      <!-- Tarjeta Principal del Clima Actual -->
+      <div class="current-weather-card" id="current-weather-card">
+        <!-- Renderizado dinámico desde app.js -->
+      </div>
+
+      <!-- Métricas Clave Adicionales -->
+      <div class="metrics-grid" id="metrics-grid">
+        <!-- Renderizado dinámico desde app.js -->
+      </div>
+
+      <!-- Pronóstico de los Próximos 7 Días -->
+      <section class="forecast-section">
+        <h2>Pronóstico para los próximos 7 días</h2>
+        <div class="forecast-grid" id="forecast-grid">
+          <!-- Tarjetas de pronóstico dinámicas -->
+        </div>
+      </section>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="app-footer">
+      <p>
+        Datos provistos por <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo REST API</a> (Sin API Key, libre y de código abierto).
+      </p>
+      <p class="academic-note">Laboratorio de Programación Web &bull; Actividad 4</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
